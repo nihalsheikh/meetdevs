@@ -13,7 +13,7 @@ const Navbar = () => {
 						height={24}
 					/>
 
-					<p className="">DevEvent</p>
+					<p className="">MeetDevs</p>
 				</Link>
 
 				<ul>
