@@ -7,17 +7,18 @@ type MongooseCache = {
 };
 
 // Extend the global object to include our mongoose cache
-declare global {
-	var mongoose: MongooseCache | undefined;
-}
+const globalWithMongoose = globalThis as typeof globalThis & {
+	mongooseCache?: MongooseCache;
+};
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // Initialize the cache on the global object to persist across hot reloads in development
-const cached: MongooseCache = global.mongoose || { conn: null, promise: null };
+const cached: MongooseCache =
+	globalWithMongoose.mongooseCache ?? { conn: null, promise: null };
 
-if (!global.mongoose) {
-	global.mongoose = cached;
+if (!globalWithMongoose.mongooseCache) {
+	globalWithMongoose.mongooseCache = cached;
 }
 
 /**
