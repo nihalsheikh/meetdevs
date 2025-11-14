@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
 	// config here
+	images: {
+		remotePatterns: [{ protocol: "https", hostname: "res.cloudinary.com" }],
+	},
 	async rewrites() {
 		return [
 			{
